@@ -1,5 +1,6 @@
 package com.example.project3.Controller;
 
+import com.example.project3.Api.ApiResponse;
 import com.example.project3.DTO.AccountDTOIn;
 import com.example.project3.DTO.AccountTransferAmountDTOIn;
 import com.example.project3.Model.MyUser;
@@ -37,7 +38,7 @@ public class AccountController {
             @Valid @RequestBody AccountDTOIn accountDTOIn
     ) {
         accountService.addAccount(myUser.getId(), accountDTOIn);
-        return ResponseEntity.ok("Account added successfully");
+        return ResponseEntity.ok(new ApiResponse("Account added successfully"));
     }
 
     @PutMapping("/update")
@@ -46,7 +47,7 @@ public class AccountController {
             @Valid @RequestBody AccountDTOIn accountDTOIn
     ) {
         accountService.updateAccount(myUser.getId(), accountDTOIn);
-        return ResponseEntity.ok("Account updated successfully");
+        return ResponseEntity.ok(new ApiResponse("Account updated successfully"));
     }
 
     @PutMapping("/deposit/{accountId}/{amount}")
@@ -56,7 +57,7 @@ public class AccountController {
             @PathVariable Double amount
     ) {
         accountService.deposit(myUser.getId(), accountId, amount);
-        return ResponseEntity.ok("Amount deposited successfully");
+        return ResponseEntity.ok(new ApiResponse("Amount deposited successfully"));
     }
 
     @PutMapping("/withdraw/{accountId}/{amount}")
@@ -66,7 +67,7 @@ public class AccountController {
             @PathVariable Double amount
     ) {
         accountService.withdraw(myUser.getId(), accountId, amount);
-        return ResponseEntity.ok("Amount withdrawn successfully");
+        return ResponseEntity.ok(new ApiResponse("Amount withdrawn successfully"));
     }
 
     @PutMapping("/transfer")
@@ -75,7 +76,7 @@ public class AccountController {
             @Valid @RequestBody AccountTransferAmountDTOIn accountTransferAmountDTOIn
     ) {
         accountService.transferAmount(myUser.getId(), accountTransferAmountDTOIn);
-        return ResponseEntity.ok("Amount transferred successfully");
+        return ResponseEntity.ok(new ApiResponse("Amount transferred successfully"));
     }
 
     @PutMapping("/activate/{accountId}")
@@ -84,7 +85,7 @@ public class AccountController {
             @PathVariable Integer accountId
     ) {
         accountService.activeBankAccount(myUser.getId(), accountId);
-        return ResponseEntity.ok("Account activated successfully");
+        return ResponseEntity.ok(new ApiResponse("Account activated successfully"));
     }
 
     @PutMapping("/deactivate/{accountId}")
@@ -93,7 +94,7 @@ public class AccountController {
             @PathVariable Integer accountId
     ) {
         accountService.deactivateBankAccount(myUser.getId(), accountId);
-        return ResponseEntity.ok("Account deactivated successfully");
+        return ResponseEntity.ok(new ApiResponse("Account deactivated successfully"));
     }
 
 }

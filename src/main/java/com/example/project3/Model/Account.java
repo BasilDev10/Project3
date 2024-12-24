@@ -2,10 +2,7 @@ package com.example.project3.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,11 +21,11 @@ public class Account {
 
     @NotEmpty(message = "Error: account number is empty")
     @Pattern(regexp = "^\\d{4}-\\d{4}-\\d{4}-\\d{4}$" , message = "Error: accountNumber Must follow a specific format (e.g., \"XXXX-XXXX-XXXX-XXXX\")")
-    @Column(nullable = false)
+    @Column(nullable = false , unique = true)
     private String accountNumber;
 
     @NotNull(message = "Error:balance is null")
-    @Positive(message = "Error: balance must be positive")
+    @PositiveOrZero(message = "Error: balance must be positive or zero")
     @Column(columnDefinition = "DOUBLE not null default 0")
     private Double balance;
 

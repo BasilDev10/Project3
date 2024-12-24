@@ -36,7 +36,9 @@ public class ConfigurationSecurity {
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/customer/register-customer" ,"/api/v1/employee/register-employee").permitAll()
-                .requestMatchers("/api/v1/customer/get-customer-profile" , "/api/v1/customer/update" ,
+                .requestMatchers("/api/v1/customer/get-customer-profile" ,
+                        "/api/v1/customer/update",
+                        "/api/v1/account/add" ,
                         "/api/v1/account/get-by-id/{accountId}" ,
                         "/api/v1/account/get-my-account" ,
                         "/api/v1/account/deposit/{accountId}/{amount}",

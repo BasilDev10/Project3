@@ -49,6 +49,8 @@ public class AccountService {
         Account account = new Account();
         account.setAccountNumber(accountDTOIn.getAccountNumber());
         account.setCustomer(myUser.getCustomer());
+        account.setActive(false);
+        account.setBalance(0.0);
         accountRepository.save(account);
     }
     public void updateAccount(Integer userId , AccountDTOIn accountDTOIn){
@@ -77,6 +79,8 @@ public class AccountService {
         if (amount <= 0 ) throw new ApiException("Error: amount must be positive");
 
         account.setBalance(account.getBalance() + amount);
+
+        accountRepository.save(account);
     }
 
     public void withdraw(Integer userId , Integer accountId , Double amount){
@@ -94,6 +98,8 @@ public class AccountService {
         if (amount > account.getBalance()) throw new ApiException("Error: amount is greater then balance account");
 
         account.setBalance(account.getBalance() - amount);
+
+        accountRepository.save(account);
     }
 
     public void transferAmount(Integer userId , AccountTransferAmountDTOIn accountTransferAmountDTOIn){
